@@ -1,36 +1,62 @@
 #include<stdio.h>
-long long n;
-double A[1000001];
-void input()
+void nhap_mang_mot_chieu(double A[101],int n);
+void xuat_mang_mot_chieu(double A[101], int n);
+void xoa_cac_phan_tu_am(double A[101], int *n);
+void xoa_phan_tu( double A[101], int *n, int k);
+int main()
 {
-	scanf("%lld",&n);
+	double A[101];
+	int n;
+	scanf("%d",&n);
+	nhap_mang_mot_chieu(A,n);
+	printf ("Mang A: \n");
+	xuat_mang_mot_chieu(A,n);
+	xoa_cac_phan_tu_am(A,&n);
+	printf ("Mang A sau khi da xoa cac phan tu am: \n");
+	xuat_mang_mot_chieu(A,n);
+}
+void nhap_mang_mot_chieu(double A[101],int n)
+{
 	int i;
-	for (i=1;i<=n;i++)
-	{
+	for (i=1;i<=n;++i)
+	{	
 		scanf("%lf",&A[i]);
 	}
 }
-void solve_1()
+void xuat_mang_mot_chieu(double A[101], int n)
 {
 	int i;
 	for (i=1;i<=n;i++)
 	{
-		printf("%lf ",A[i]);
+		printf("%.2lf ",A[i]);
 	}
 	printf("\n");
 }
-void solve_2()
+void xoa_cac_phan_tu_am(double A[101], int *n)
+{
+	int i=1;
+	while (i <= *n) 
+	{
+        if (A[i] < 0)
+		{
+            xoa_phan_tu(A, n, i);
+        } 
+		else 
+		{
+            i++;
+        }
+    }
+}
+void xoa_phan_tu( double A[101], int *n, int k)
 {
 	int i;
-	for (i=1;i<=n;i++)
+	if (k > *n)
 	{
-		if (A[i]>=0) printf("%lf ",A[i]);
-	}
-}
-int main()
-{
-	input();
-	solve_1();
-	solve_2();
-	return 0;
+        return;
+    }
+    for (i = k; i < *n; i++) 
+	{
+        A[i] = A[i+1];
+    }
+    (*n)--;
 }
