@@ -1,0 +1,80 @@
+Hàm nhap_ma_tran(A, n):
+        Lặp i từ 0 đến n-1:
+                Lặp j từ 0 đến n-1:
+                        Nhập A[i][j]
+
+Hàm xuat_ma_tran(A, n):
+        Lặp i từ 0 đến n-1:
+                Lặp j từ 0 đến n-1:
+                        In A[i][j]
+                In (ký tự xuống dòng)
+
+Hàm nghichdao(A, n):
+        // Khai báo ma trận mở rộng [A | I] kích thước n x 2n
+        Khai báo ma trận A_mo_rong[n][2*n]
+        
+        // 1. Tạo ma trận mở rộng
+        Lặp i từ 0 đến n-1:
+                Lặp j từ 0 đến 2*n - 1:
+                        Nếu j < n: // Nửa bên trái là ma trận A
+                                A_mo_rong[i][j] = A[i][j]
+                        Ngược lại: // Nửa bên phải là ma trận đơn vị I
+                                Nếu j == (i + n):
+                                        A_mo_rong[i][j] = 1.0
+                                Ngược lại:
+                                        A_mo_rong[i][j] = 0.0
+        
+        // 2. Khử Gauss (Biến đổi ma trận A thành ma trận tam giác trên)
+        Lặp i từ 0 đến n-1: // Duyệt qua từng cột
+                // 2.1. Tìm trụ (Pivoting): Tìm hàng có phần tử lớn nhất ở cột i
+                Đặt hang_doi = i
+                Lặp j từ i + 1 đến n-1:
+                        Nếu |A_mo_rong[j][i]| > |A_mo_rong[hang_doi][i]|:
+                                Đặt hang_doi = j
+                
+                // 2.2. Hoán vị hàng
+                Nếu hang_doi != i:
+                        Lặp z từ 0 đến 2*n - 1: // Hoán vị toàn bộ hàng
+                                Đặt temp = A_mo_rong[i][z]
+                                A_mo_rong[i][z] = A_mo_rong[hang_doi][z]
+                                A_mo_rong[hang_doi][z] = temp
+                
+                // 2.3. Kiểm tra ma trận suy biến (không khả nghịch)
+                Nếu |A_mo_rong[i][i]| < 1e-9: // Nếu phần tử trụ bằng 0
+                        In "Khong co ma tran nghich dao"
+                        Dừng hàm
+                
+                // 2.4. Khử các phần tử bên dưới trụ
+                Lặp j từ i + 1 đến n-1: // Duyệt các hàng bên dưới hàng i
+                        Đặt tmp = A_mo_rong[j][i] / A_mo_rong[i][i]
+                        Lặp z từ 0 đến 2*n - 1: // Trừ cả hàng
+                                A_mo_rong[j][z] = A_mo_rong[j][z] - (A_mo_rong[i][z] * tmp)
+
+        // 3. Khử Jordan (Biến đổi A thành ma trận đường chéo)
+        Lặp i từ n-1 xuống 0: // Duyệt từ hàng cuối lên
+                Lặp j từ i-1 xuống 0: // Duyệt các hàng bên trên hàng i
+                        Đặt tmp = A_mo_rong[j][i] / A_mo_rong[i][i]
+                        Lặp z từ 0 đến 2*n - 1: // Trừ cả hàng
+                                A_mo_rong[j][z] = A_mo_rong[j][z] - (A_mo_rong[i][z] * tmp)
+
+        // 4. Chuẩn hóa (Biến A thành I) và Trích xuất ma trận nghịch đảo
+        In "Ma tran nghich dao cua ma tran A la:"
+        Lặp i từ 0 đến n-1:
+                Đặt tmp = A_mo_rong[i][i] // Phần tử trên đường chéo (chắc chắn khác 0)
+                Lặp j từ 0 đến n-1:
+                        // Lấy phần tử từ nửa bên phải (từ cột n đến 2n-1)
+                        // Và chia cho phần tử chéo để chuẩn hóa
+                        Đặt ket_qua = A_mo_rong[i][j + n] / tmp
+                        In ket_qua
+                In (ký tự xuống dòng)
+
+Chương trình chính:
+        In "Nhap ma tran A cap nxn: "
+        Nhập n
+        Khai báo ma trận A[n][n]
+        Gọi nhap_ma_tran(A, n)
+        
+        In "Ma tran A la: "
+        Gọi xuat_ma_tran(A, n)
+        
+        Gọi nghichdao(A, n)

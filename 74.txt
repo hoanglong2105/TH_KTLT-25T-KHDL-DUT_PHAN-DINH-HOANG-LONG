@@ -1,0 +1,46 @@
+Hàm nhap_ma_tran(A, m, n):
+        Lặp i từ 1 đến m:
+                Lặp j từ 1 đến n:
+                        Nhập A[i][j]
+
+Hàm xuat_ma_tran(A, m, n):
+        Lặp i từ 1 đến m:
+                Lặp j từ 1 đến n:
+                        In A[i][j]
+                In (ký tự xuống dòng)
+
+Hàm solve(A, m, n):
+        Đặt tổng = 0
+        In "Dua cac phan tu cua tung hang cua ma tran len duong cheo chinh: "
+        
+        // Vòng lặp duyệt qua từng hàng
+        Lặp i từ 1 đến m:
+                // Tìm phần tử lớn nhất của hàng i
+                Đặt Max = A[i][1]
+                Lặp j từ 1 đến n:
+                        Nếu A[i][j] > Max:
+                                Đặt Max = A[i][j]
+                
+                // Cộng Max vào tổng
+                Tổng = Tổng + Max
+                // Gán Max vào phần tử trên đường chéo chính A[i][i]
+                A[i][i] = Max
+        
+        // In ra ma trận sau khi đã thay đổi
+        Lặp i từ 1 đến m:
+                Lặp j từ 1 đến n:
+                        In A[i][j]
+                In (ký tự xuống dòng)
+        
+        In "Tong cac phan tu lon nhat cua tung hang: "
+        In Tổng
+
+Chương trình chính:
+        Khai báo mảng A, số nguyên m, n
+        Nhập m, n
+        Gọi nhap_ma_tran(A, m, n)
+        
+        In "Ma tran A: "
+        Gọi xuat_ma_tran(A, m, n)
+        
+        Gọi solve(A, m, n)

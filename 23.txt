@@ -1,0 +1,32 @@
+Chương trình chính:
+Nhập số thực a
+   	Nhập số nguyên n
+    	// Câu a
+    	In "a^n =", gọi hàm solve_a(a, n)
+    	// Câu b
+    	In "a(a+1)...(a+n-1) =", gọi hàm solve_b(a, n)
+   	 // Câu c 
+//Kiểm tra mẫu số
+   	 Đặt có_lỗi = false
+    	Lặp i từ 0 đến n:
+        		Nếu (a + i) == 0:
+            		Có_lỗi = true
+            	Thoát lặp
+   	Nếu có_lỗi=true
+        		In "Không thể tính giá trị (vì có mẫu số bằng 0)"
+   	 Ngược lại:
+       		In "Giá trị 1/a + ... =", gọi hàm solve_c(a, n)
+Hàm solve_a(a, n):
+    	Trả về a ^ n
+Hàm solve_b(a, n):
+   	Đặt tích = 1.0
+    	Lặp i từ 0 đến n-1:
+        		Tích = tích * (a + i)
+    	Trả về tích
+Hàm solve_c(a, n):
+   	Đặt số_hạng = 1.0 / a
+    	Đặt tổng = số_hạng
+    	Lặp i từ 1 đến n:
+        		Số_hạng = số_hạng * (1.0 / (a + i))
+        		Tổng = tổng + số_hạng
+    	Trả về tổng

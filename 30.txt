@@ -1,0 +1,45 @@
+Hàm giải_pt_bậc_hai(a, b, c, tham_chiếu nghiệm1, tham_chiếu nghiệm2):
+        // Trường hợp (a=0): Phương trình tuyến tính (bx + c = 0)
+        Nếu a == 0:
+                Nếu b == 0:
+                        Nếu c == 0:
+                                // 0x = 0
+                                Trả về -1 // Vô số nghiệm
+                        Ngược lại:
+                                // 0x = c (với c != 0)
+                                Trả về 0 // Vô nghiệm
+                Ngược lại: // b != 0
+                        // bx = -c
+                        nghiệm1 = -c / b
+                        Trả về 1 // Nghiệm duy nhất
+        // Trường hợp (a!=0): Phương trình bậc hai
+        Ngược lại:
+                Đặt delta = b*b - 4*a*c
+                Nếu delta < 0:
+                        Trả về 0 // Vô nghiệm
+                Ngược lại nếu delta == 0:
+                        nghiệm1 = -b / (2*a)
+                        Trả về 1 // Nghiệm kép
+                Ngược lại: // delta > 0
+                        nghiệm1 = (-b + căn_bậc_hai(delta)) / (2*a)
+                        nghiệm2 = (-b - căn_bậc_hai(delta)) / (2*a)
+                        Trả về 2 // 2 nghiệm phân biệt
+
+Chương trình chính:
+        Nhập a, b, c
+        // Khai báo biến để lưu nghiệm
+        Đặt nghiệm1, nghiệm2
+        
+        // Gọi hàm và nhận số lượng nghiệm
+        Đặt số_nghiệm = giải_pt_bậc_hai(a, b, c, tham_chiếu nghiệm1, tham_chiếu nghiệm2)
+        
+        // In kết quả dựa trên số nghiệm trả về
+        Theo trường hợp (số_nghiệm):
+                Trường hợp -1:
+                        In "Phương trình có vô số nghiệm"
+                Trường hợp 0:
+                        In "Phương trình vô nghiệm"
+                Trường hợp 1:
+                        In "Phương trình có nghiệm duy nhất x =", nghiệm1
+                Trường hợp 2:
+                        In "Phương trình có 2 nghiệm phân biệt x1 =", nghiệm1, "x2 =", nghiệm2

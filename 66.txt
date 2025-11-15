@@ -1,0 +1,44 @@
+Hàm nhap_mang_mot_chieu(A, n):
+        Lặp i từ 1 đến n:
+                Nhập A[i]
+
+Hàm xuat_mang_mot_chieu(A, n):
+        Lặp i từ 1 đến n:
+                In A[i]
+        In (ký tự xuống dòng)
+
+Hàm xoa_phan_tu(A, tham_chiếu n, k):
+        // (Giả sử k luôn <= n)
+        // Dịch chuyển các phần tử từ vị trí k+1 về trước
+        Lặp i từ k đến n-1:
+                A[i] = A[i+1]
+        // Giảm số lượng phần tử của mảng
+        n = n - 1
+
+Hàm xoa_cac_phan_tu_am(A, tham_chiếu n):
+        Đặt i = 1
+        // Dùng 'trong khi' vì kích thước n thay đổi
+        Trong khi i <= n:
+                Nếu A[i] < 0:
+                        // Xóa phần tử tại vị trí i
+                        // Sau khi xóa, A[i+1] mới sẽ dồn lên vị trí i
+                        // Không tăng i để vòng lặp tiếp theo kiểm tra chính vị trí i này
+                        Gọi xoa_phan_tu(A, tham_chiếu n, i)
+                Ngược lại:
+                        // Nếu A[i] không âm, chuyển sang phần tử tiếp theo
+                        i = i + 1
+
+Chương trình chính:
+        Khai báo mảng A, số nguyên n
+        Nhập n
+        
+        Gọi nhap_mang_mot_chieu(A, n)
+        
+        In "Mang A: "
+        Gọi xuat_mang_mot_chieu(A, n)
+        
+        // Truyền n bằng tham chiếu để hàm có thể cập nhật kích thước mảng
+        Gọi xoa_cac_phan_tu_am(A, tham_chiếu n)
+        
+        In "Mang A sau khi da xoa cac phan tu am: "
+        Gọi xuat_mang_mot_chieu(A, n)
