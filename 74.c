@@ -1,30 +1,46 @@
 #include<stdio.h>
-int m,n,i,j;
-int A[1001][1001],sum=0,Max;
-void input()
+void nhap_ma_tran(double A[101][101], int m, int n);
+void xuat_ma_tran(double A[101][101], int m, int n);
+void solve(double A[101][101], int m, int n);
+int main()
 {
-	scanf("%d%d",&m,&n);
-	for (i=1;i<=m;i++)
+	double A[101][101];
+	int m,n;
+	scanf("%d %d",&m,&n);
+	nhap_ma_tran(A,m,n);
+	printf("Ma tran A: \n");
+	xuat_ma_tran(A,m,n);
+	solve(A,m,n);
+	return 0;
+}
+void nhap_ma_tran(double A[101][101], int m, int n)
+{
+	int i,j;
+	for (i=1;i<=m;++i)
 	{
-		for (j=1;j<=n;j++)
+		for (j=1; j<=n; ++j)
 		{
-			scanf("%d",&A[i][j]);
+			scanf("%lf",&A[i][j]);
 		}
 	}
 }
-void solve_1()
+void xuat_ma_tran(double A[101][101], int m, int n)
 {
-	for (i=1;i<=m;i++)
+	int i,j;
+	for (i=1;i<=m;++i)
 	{
-		for (j=1;j<=n;j++)
+		for (j=1; j<=n; ++j)
 		{
-			printf("%d ",A[i][j]);
+			printf("%.2lf ",A[i][j]);
 		}
-		printf("\n");
+		printf ("\n");
 	}
 }
-void solve_2()
+void solve(double A[101][101], int m, int n)
 {
+	int i,j;
+	double Max,sum=0;
+	printf ("Dua cac phan tu cua tung hang cua ma tran len duong cheo chinh: \n");
 	for (i=1;i<=m;i++)
 	{
 		Max=A[i][1];
@@ -39,16 +55,10 @@ void solve_2()
 	{
 		for (j=1;j<=n;j++)
 		{
-			printf("%d ",A[i][j]);
+			printf("%.2lf ",A[i][j]);
 		}
 		printf("\n");
 	}
-	printf ("%d",sum);
-}
-int main()
-{
-	input();
-	solve_1();
-	solve_2();
-	return 0;
+	printf ("Tong cac phan tu lon nhat cua tung hang: ");
+	printf ("%.2lf",sum);
 }
